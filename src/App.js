@@ -1,5 +1,6 @@
 import logo from './images/taskmanager.avif';
 import './App.css';
+import Tasks from './components/Tasks/Tasks';
 
 function App() {
   return (
@@ -7,7 +8,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <h1 className="text-primary">Task Manager</h1>
+      <h1 className="text-primary">Tasks Manager</h1>
+      <Tasks />
     </div>
   );
 }
