@@ -46,6 +46,28 @@ export default function Task(prop) {
     window.location.reload();
   };
 
+  // Local Storage function
+  const localStorageUpdateComplete = (checkedValue, arrIndex) => {
+    const localStoreArray = JSON.parse(localStorage.getItem('tasks'));
+    const updatedTasksArray = localStoreArray.map((task, index) => {
+      if (index === Number(arrIndex)) {
+        return {
+          ...task,
+          complete: checkedValue,
+        };
+      }
+      return task;
+    });
+    localStorage.setItem('tasks', JSON.stringify(updatedTasksArray));
+  };
+  //   Handle the check box change
+  const handleChang = (e) => {
+    const checkedValue = e.target.checked;
+    const arrIndex = Number(e.target.id.split('-')[1]);
+    localStorageUpdateComplete(checkedValue, arrIndex);
+    window.location.reload();
+  };
+
   return (
     <div>
       {
@@ -54,11 +76,13 @@ export default function Task(prop) {
             <ul style={{ listStyleType: 'none' }} className="d-flex justify-content-around" key={uuid()}>
               <label htmlFor={index}>
                 complete?
-                <input style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
+                <input onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
               </label>
-              <li id={`task-${index}`} className="">{task.taskName}</li>
+              {
+                (!task.complete) ? <li id={`task-${index}`}>{task.taskName}</li> : <li id={`task-${index}`}><s>{task.taskName}</s></li>
+              }
               <input id={`update-${index}`} className="none" type="text" defaultValue={task.taskName} />
-              <button id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
+              <button disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
               <button id={`save-${index}`} onClick={handleSaveClick} type="button" className="none btn btn-primary">Save</button>
               <button onClick={handleDelete} id={`delete-${index}`} type="button" className="btn btn-danger">Delete</button>
             </ul>

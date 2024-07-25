@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 export default function AddTasks() {
   const [inputs, setInputs] = useState();
 
-  // Input data change
+  // Handle the Input data change
   const handleChange = (event) => {
     setInputs(event.target.value);
   };
 
-  // Handle the button click
+  // Handle the Add button click
   const handleClick = () => {
     const prevValue = JSON.parse(localStorage.getItem('tasks'));
     if (prevValue === null) {
@@ -23,7 +23,7 @@ export default function AddTasks() {
   };
 
   return (
-    <div>
+    <div className="m-3">
       <label htmlFor="taskName">
         Add a New task
         <br />
