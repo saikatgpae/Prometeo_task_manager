@@ -1,8 +1,12 @@
 // /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchTasks } from '../../Redux/Tasks/tasksRedux';
 
 export default function AddTasks() {
-  const [inputs, setInputs] = useState();
+  const [inputs, setInputs] = useState('');
+  const dispatch = useDispatch();
+  const taskInput = useRef(null);
 
   // Handle the Input data change
   const handleChange = (event) => {
@@ -13,13 +17,14 @@ export default function AddTasks() {
   const handleClick = () => {
     const prevValue = JSON.parse(localStorage.getItem('tasks'));
     if (prevValue === null) {
-      const newValue = JSON.stringify([{ complete: false, taskName: inputs }]);
-      localStorage.setItem('tasks', newValue);
+      const newValue = [{ complete: false, taskName: inputs }];
+      localStorage.setItem('tasks', JSON.stringify(newValue));
     } else {
       const newValue = [...prevValue, { complete: false, taskName: inputs }];
       localStorage.setItem('tasks', JSON.stringify(newValue));
     }
-    window.location.reload();
+    taskInput.current.value = '';
+    dispatch(fetchTasks());
   };
 
   return (
@@ -28,6 +33,7 @@ export default function AddTasks() {
         Add a New task
         <br />
         <input
+          ref={taskInput}
           name="taskName"
           type="text"
           placeholder="Add a new Task"

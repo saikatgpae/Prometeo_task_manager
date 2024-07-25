@@ -2,8 +2,11 @@
 import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
+import { useDispatch } from 'react-redux';
+import { fetchTasks } from '../../Redux/Tasks/tasksRedux';
 
 export default function Task(prop) {
+  const dispatch = useDispatch();
   const { tasks } = prop;
 
   // Local Storage function
@@ -43,12 +46,13 @@ export default function Task(prop) {
     const indexNumber = Number(e.target.id.split('-')[1]);
     const newArrayAfterFilter = localStore.filter((element, index) => index !== indexNumber);
     localStorage.setItem('tasks', JSON.stringify(newArrayAfterFilter));
-    window.location.reload();
+    dispatch(fetchTasks());
   };
 
   // Local Storage function
   const localStorageUpdateComplete = (checkedValue, arrIndex) => {
-    const localStoreArray = JSON.parse(localStorage.getItem('tasks'));
+    // const localStoreArray = JSON.parse(localStorage.getItem('tasks'));
+    const localStoreArray = localStorage.getItem('tasks');
     const updatedTasksArray = localStoreArray.map((task, index) => {
       if (index === Number(arrIndex)) {
         return {
@@ -65,7 +69,8 @@ export default function Task(prop) {
     const checkedValue = e.target.checked;
     const arrIndex = Number(e.target.id.split('-')[1]);
     localStorageUpdateComplete(checkedValue, arrIndex);
-    window.location.reload();
+    dispatch(fetchTasks());
+    // window.location.reload();
   };
 
   return (
