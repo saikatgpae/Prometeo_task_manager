@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
@@ -40,38 +40,65 @@ export default function Task(prop) {
     (checkedValue) ? dispatch(completeTask(arrIndex)) : dispatch(incompleteTask(arrIndex));
   };
 
+  // Search function
+  const titleSearch = (e) => {
+    const input = e.target.value.toUpperCase();
+    // console.log('input', input);
+    const table = document.getElementById('taskTable');
+    const tr = table.querySelectorAll('.table-data');
+    for (let i = 0; i < tr.length; i += 1) {
+      const td = tr[i].getElementsByTagName('td')[0];
+      if (td) {
+        const txtValue = td.textContent || td.innerText;
+        if (input === 'ALL') {
+          tr[i].style.display = '';
+        } else if (txtValue.toUpperCase() === input) {
+          tr[i].style.display = '';
+        } else {
+          tr[i].style.display = 'none';
+        }
+      }
+    }
+  };
+
   return (
-    <table className="table table-striped">
+    <table id="taskTable" className="table table-striped">
       <tbody>
         <tr>
+          <th scope="col">
+            <select onChange={titleSearch} defaultValue="all">
+              <option>all</option>
+              <option>complete</option>
+              <option>incomplete</option>
+            </select>
+          </th>
           <th scope="col">Status</th>
-          <th scope="col">Complete?</th>
           <th scope="col">Task Name</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
         </tr>
         {
           (tasks)
-            ?  tasks.map((task, index) =>(
-                <tr key={uuid()}>
-                  <td className={(task.complete) ? 'text-success' : 'text-danger'}>
-                    {(task.complete) ? 'Complete' : 'Incomplete'}
-                  </td>
-                  <td>
-                    <input onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
-                  </td>
-                  <td>
-                    <p className={(task.complete) ? 'strike' : ''} id={`task-${index}`}>{task.taskName}</p>
-                    <input id={`update-${index}`} className="none" type="text" defaultValue={task.taskName} />
-                  </td>
-                  <td>
-                    <button disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
-                    <button id={`save-${index}`} onClick={handleSaveClick} type="button" className="none btn btn-primary">Save</button>
-                  </td>
-                  <td>
-                    <button onClick={handleDelete} id={`delete-${index}`} type="button" className="btn btn-danger">Delete</button>
-                  </td> 
-                </tr>
+            ? tasks.map((task, index) => (
+              <tr key={uuid()} className="table-data">
+                <td className={(task.complete) ? 'text-success' : 'text-danger'}>
+                  {(task.complete) ? 'Complete' : 'Incomplete'}
+                </td>
+                <td>
+                  <input onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
+                </td>
+                <td>
+                  <strong className={(task.complete) ? 'strike' : ''} id={`task-${index}`}>{task.taskName}</strong>
+                  <input id={`update-${index}`} className="none" type="text" defaultValue={task.taskName} />
+                </td>
+                <td>
+                  <button disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
+                  <button id={`save-${index}`} onClick={handleSaveClick} type="button" className="none btn btn-primary">Save</button>
+                </td>
+                <td>
+                  <button onClick={handleDelete} id={`delete-${index}`} type="button" className="btn btn-danger">Delete</button>
+                </td>
+              </tr>
             )) : <p>No Task</p>
         }
       </tbody>
