@@ -1,5 +1,5 @@
 const initialState = localStorage.getItem('tasks');
-//   { taskName: 'cooking', complete: true },
+// console.log(initialState.filter((task, index) => index !== 3));
 
 const FETCH_TASKS = 'FETCH_TASKS';
 
@@ -17,7 +17,7 @@ const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_TASKS:
       return [
-        ...action.tasks,
+        JSON.parse(state),
       ];
     default:
       return state;

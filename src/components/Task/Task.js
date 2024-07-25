@@ -1,23 +1,40 @@
 // /* eslint-disable */
-import React, { useState } from 'react';
+import React from 'react';
 import uuid from 'react-uuid';
+import './Task.css';
 
 export default function Task(prop) {
-  const [editor, setEditor] = useState(false);
-  const [button, setButton] = useState(false);
-  const {
-    tasks,
-  } = prop;
+  const { tasks } = prop;
+
+  // Local Storage function
+  const localStorageUpdate = (newTask, arrIndex) => {
+    const localStoreArray = JSON.parse(localStorage.getItem('tasks'));
+    const updatedTasksArray = localStoreArray.map((task, index) => {
+      if (index === Number(arrIndex)) {
+        return {
+          ...task,
+          taskName: newTask,
+        };
+      }
+      return task;
+    });
+    localStorage.setItem('tasks', JSON.stringify(updatedTasksArray));
+  };
 
   //   Edit button clicked
-  const handleEditClick = () => {
-    setEditor(true);
-    setButton(true);
+  const handleEditClick = (e) => {
+    const elementId = e.target.id.split('-')[1];
+    e.target.classList.add('none');
+    document.getElementById(`save-${elementId}`).classList.remove('none');
+    document.getElementById(`update-${elementId}`).classList.remove('none');
+    document.getElementById(`task-${elementId}`).classList.add('none');
   };
   //   Save button clicked
-  const handleSaveClick = () => {
-    setEditor(false);
-    setButton(false);
+  const handleSaveClick = (e) => {
+    const elementId = e.target.id.split('-')[1];
+    const task = document.getElementById(`update-${elementId}`).value;
+    localStorageUpdate(task, elementId);
+    window.location.reload();
   };
 
   //   Handle Delete butoon click
@@ -39,24 +56,10 @@ export default function Task(prop) {
                 complete?
                 <input style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
               </label>
-              {
-                (!editor)
-                  ? (
-                    <li>
-                      {
-                        task.taskName
-                      }
-                    </li>
-                  )
-                  : <input type="text" defaultValue={task.taskName} />
-              }
-              {
-                (!button)
-                  ? (
-                    <button onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
-                  )
-                  : <button onClick={handleSaveClick} type="button" className="btn btn-primary">save</button>
-              }
+              <li id={`task-${index}`} className="">{task.taskName}</li>
+              <input id={`update-${index}`} className="none" type="text" defaultValue={task.taskName} />
+              <button id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
+              <button id={`save-${index}`} onClick={handleSaveClick} type="button" className="none btn btn-primary">Save</button>
               <button onClick={handleDelete} id={`delete-${index}`} type="button" className="btn btn-danger">Delete</button>
             </ul>
           )) : <p>Do not hav a task? Add one.</p>

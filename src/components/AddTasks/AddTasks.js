@@ -6,14 +6,12 @@ export default function AddTasks() {
 
   // Input data change
   const handleChange = (event) => {
-    const { value } = event.target;
-    setInputs(() => (value));
+    setInputs(event.target.value);
   };
 
   // Handle the button click
   const handleClick = () => {
     const prevValue = JSON.parse(localStorage.getItem('tasks'));
-    // console.log(prevValue);
     if (prevValue === null) {
       const newValue = JSON.stringify([{ complete: false, taskName: inputs }]);
       localStorage.setItem('tasks', newValue);
@@ -37,11 +35,7 @@ export default function AddTasks() {
           onChange={handleChange}
         />
       </label>
-      {
-        (!inputs || inputs[0] === ' ')
-          ? <button onClick={handleClick} type="button" className="btn btn-primary" disabled>Add</button>
-          : <button onClick={handleClick} type="button" className="btn btn-primary">Add</button>
-      }
+      <button onClick={handleClick} type="button" className="btn btn-primary" disabled={(!inputs || inputs[0] === ' ')}>Add</button>
     </div>
   );
 }
