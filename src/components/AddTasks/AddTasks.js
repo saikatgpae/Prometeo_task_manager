@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchTasks } from '../../Redux/Tasks/tasksRedux';
+import './AddTasks.css';
 
 export default function AddTasks() {
   const [inputs, setInputs] = useState('');
@@ -30,13 +31,13 @@ export default function AddTasks() {
   return (
     <div className="m-3">
       <label htmlFor="taskName">
-        Add a New task
+        Add you tasks
         <br />
         <input
           ref={taskInput}
           name="taskName"
           type="text"
-          placeholder="Add a new Task"
+          placeholder="Type a Task"
           id="taskName"
           onChange={handleChange}
         />

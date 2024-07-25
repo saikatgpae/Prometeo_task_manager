@@ -1,45 +1,43 @@
-/* eslint-disable */
-import React, { useRef, useState } from 'react';
+// /* eslint-disable */
+import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
+import { useDispatch } from 'react-redux';
+import {
+  completeTask, deleteTask, editTask, incompleteTask,
+} from '../../Redux/Tasks/tasksRedux';
 
 export default function Task(prop) {
-//   const [editor, setEditor] = useState(false);
-  const [updatedInput, setUpdatedInput] = useState();
-  const [taskID, setTaskID] = useState();
-  const checkBoxRef = useRef(null);
-  const taskNameRef = useRef(null);
-  const {
-    tasks,
-  } = prop;
-
-  const viewMode = {};
-  const editMode = {};
+  const dispatch = useDispatch();
+  const { tasks } = prop;
 
   //   Edit button clicked
   const handleEditClick = (e) => {
-    e.preventDefault();
+    const elementId = e.target.id.split('-')[1];
     e.target.classList.add('none');
-    e.target.previousSibling.previousSibling.classList.add('none');
-    e.target.nextSibling.classList.remove('none');
-    e.target.previousSibling.classList.remove('none');
+    document.getElementById(`save-${elementId}`).classList.remove('none');
+    document.getElementById(`update-${elementId}`).classList.remove('none');
+    document.getElementById(`task-${elementId}`).classList.add('none');
   };
   //   Save button clicked
   const handleSaveClick = (e) => {
-    e.preventDefault();
-    e.target.classList.add('none');
-    e.target.previousSibling.classList.remove('none');
-    e.target.previousSibling.previousSibling.classList.add('none');
-    e.target.previousSibling.previousSibling.previousSibling.classList.remove('none');
-    console.log(e.target.id.split('-')[1]);
-    console.log(taskNameRef.current.value);
+    const elementId = e.target.id.split('-')[1];
+    const task = document.getElementById(`update-${elementId}`).value;
+    dispatch(editTask(task, elementId));
   };
 
-  //   Handle onchange of input form
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    // setUpdatedInput(e.target.value);
-    // console.log(updatedInput);
+  //   Handle Delete butoon click
+  const handleDelete = (e) => {
+    const indexNumber = Number(e.target.id.split('-')[1]);
+    dispatch(deleteTask(indexNumber));
+  };
+
+  //   Handle the check box change
+  const handleChang = (e) => {
+    const checkedValue = e.target.checked;
+    const arrIndex = Number(e.target.id.split('-')[1]);
+    // eslint-disable-next-line
+    (checkedValue) ? dispatch(completeTask(arrIndex)) : dispatch(incompleteTask(arrIndex));
   };
 
   return (
@@ -48,15 +46,17 @@ export default function Task(prop) {
         (tasks)
           ? tasks.map((task, index) => (
             <ul style={{ listStyleType: 'none' }} className="d-flex justify-content-around" key={uuid()}>
-              <label htmlFor={index}>
-                complete?
-                <input ref={checkBoxRef} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={index} />
-              </label>
-              <li style={viewMode}>{task.taskName}</li>
-              <input id={`edit-${index}`} ref={taskNameRef} onChange={handleChange} className="none" style={editMode} type="text" defaultValue={task.taskName} />
-              <button id={`edit-${index}`} style={viewMode} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
-              <button id={`save-${index}`} style={editMode} onClick={handleSaveClick} type="button" className="none btn btn-primary">save</button>
-              <button type="button" className="btn btn-danger">Delete</button>
+              <li className={(task.complete) ? 'text-success' : 'text-danger'}>
+                {(task.complete) ? 'Complete' : 'Incomplete'}
+              </li>
+              <input onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
+              {
+                (!task.complete) ? <li id={`task-${index}`}>{task.taskName}</li> : <li id={`task-${index}`}><s>{task.taskName}</s></li>
+              }
+              <input id={`update-${index}`} className="none" type="text" defaultValue={task.taskName} />
+              <button disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
+              <button id={`save-${index}`} onClick={handleSaveClick} type="button" className="none btn btn-primary">Save</button>
+              <button onClick={handleDelete} id={`delete-${index}`} type="button" className="btn btn-danger">Delete</button>
             </ul>
           )) : <p>Do not hav a task? Add one.</p>
       }
@@ -64,5 +64,3 @@ export default function Task(prop) {
     </div>
   );
 }
-
-
