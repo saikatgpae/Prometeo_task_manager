@@ -3,26 +3,13 @@ import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
 import { useDispatch } from 'react-redux';
-import { fetchTasks } from '../../Redux/Tasks/tasksRedux';
+import {
+  completeTask, deleteTask, editTask, incompleteTask,
+} from '../../Redux/Tasks/tasksRedux';
 
 export default function Task(prop) {
   const dispatch = useDispatch();
   const { tasks } = prop;
-
-  // Local Storage function
-  const localStorageUpdate = (newTask, arrIndex) => {
-    const localStoreArray = JSON.parse(localStorage.getItem('tasks'));
-    const updatedTasksArray = localStoreArray.map((task, index) => {
-      if (index === Number(arrIndex)) {
-        return {
-          ...task,
-          taskName: newTask,
-        };
-      }
-      return task;
-    });
-    localStorage.setItem('tasks', JSON.stringify(updatedTasksArray));
-  };
 
   //   Edit button clicked
   const handleEditClick = (e) => {
@@ -36,41 +23,21 @@ export default function Task(prop) {
   const handleSaveClick = (e) => {
     const elementId = e.target.id.split('-')[1];
     const task = document.getElementById(`update-${elementId}`).value;
-    localStorageUpdate(task, elementId);
-    window.location.reload();
+    dispatch(editTask(task, elementId));
   };
 
   //   Handle Delete butoon click
   const handleDelete = (e) => {
-    const localStore = JSON.parse(localStorage.getItem('tasks'));
     const indexNumber = Number(e.target.id.split('-')[1]);
-    const newArrayAfterFilter = localStore.filter((element, index) => index !== indexNumber);
-    localStorage.setItem('tasks', JSON.stringify(newArrayAfterFilter));
-    dispatch(fetchTasks());
+    dispatch(deleteTask(indexNumber));
   };
 
-  // Local Storage function
-  const localStorageUpdateComplete = (checkedValue, arrIndex) => {
-    // const localStoreArray = JSON.parse(localStorage.getItem('tasks'));
-    const localStoreArray = localStorage.getItem('tasks');
-    const updatedTasksArray = localStoreArray.map((task, index) => {
-      if (index === Number(arrIndex)) {
-        return {
-          ...task,
-          complete: checkedValue,
-        };
-      }
-      return task;
-    });
-    localStorage.setItem('tasks', JSON.stringify(updatedTasksArray));
-  };
   //   Handle the check box change
   const handleChang = (e) => {
     const checkedValue = e.target.checked;
     const arrIndex = Number(e.target.id.split('-')[1]);
-    localStorageUpdateComplete(checkedValue, arrIndex);
-    dispatch(fetchTasks());
-    // window.location.reload();
+    // eslint-disable-next-line
+    (checkedValue) ? dispatch(completeTask(arrIndex)) : dispatch(incompleteTask(arrIndex));
   };
 
   return (

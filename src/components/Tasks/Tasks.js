@@ -5,13 +5,11 @@ import { useEffect } from 'react';
 import AddTasks from '../AddTasks/AddTasks';
 import Task from '../Task/Task';
 import { fetchTasks } from '../../Redux/Tasks/tasksRedux';
-// import { useEffect, useState } from 'react';
 
 export default function Tasks() {
   const dispatch = useDispatch();
   // Call the tasks from Redux
   const tasks = useSelector((state) => state.tasks);
-
   useEffect(() => {
     if (tasks === null) {
       dispatch(fetchTasks());
