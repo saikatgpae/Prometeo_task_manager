@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
@@ -71,9 +70,9 @@ export default function Task(prop) {
         <option>incomplete</option>
       </select>
       <div className="table-responsive table-div">
-      <table id="taskTable" className="task-table table table-hover">
-      <tbody>
-        {
+        <table id="taskTable" className="task-table table table-hover">
+          <tbody>
+            {
           (tasks)
             ? tasks.map((task, index) => (
               <tr key={uuid()} className="table-data">
@@ -94,9 +93,9 @@ export default function Task(prop) {
               </tr>
             )) : <p>No Task</p>
         }
-      </tbody>
-    </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

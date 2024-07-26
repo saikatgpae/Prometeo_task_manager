@@ -1,4 +1,3 @@
-// /* eslint-disable */
 import { useDispatch, useSelector } from 'react-redux';
 import './Tasks.css';
 import { useEffect } from 'react';

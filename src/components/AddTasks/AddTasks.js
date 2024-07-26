@@ -1,4 +1,3 @@
-// /* eslint-disable */
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchTasks } from '../../Redux/Tasks/tasksRedux';

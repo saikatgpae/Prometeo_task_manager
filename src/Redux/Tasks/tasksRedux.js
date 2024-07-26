@@ -1,4 +1,3 @@
-// /* eslint-disable */
 const FETCH_TASKS = 'FETCH_TASKS';
 const COMPLETE_TASK = 'COMPLETE_TASK';
 const INCOMPLETE_TASK = 'INCOMPLETE_TASK';
