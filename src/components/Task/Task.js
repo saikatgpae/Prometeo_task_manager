@@ -1,3 +1,4 @@
+// /* eslint-disable */
 import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
@@ -63,12 +64,18 @@ export default function Task(prop) {
   };
 
   return (
-    <div className="container">
-      <select onChange={titleSearch} className="filter-menu" id="filter-menu">
-        <option>all</option>
-        <option>complete</option>
-        <option>incomplete</option>
-      </select>
+    <div className="container container-div">
+      {
+        (tasks)
+          ? (
+            <select onChange={titleSearch} className="filter-menu" id="filter-menu">
+              <option>all</option>
+              <option>complete</option>
+              <option>incomplete</option>
+            </select>
+          ) : ('')
+
+      }
       <div className="table-responsive table-div">
         <table id="taskTable" className="task-table table table-hover">
           <tbody>
@@ -81,7 +88,7 @@ export default function Task(prop) {
                 </td>
                 <td className="task-display">
                   <strong className={(task.complete) ? 'task-name strike text-success' : 'task-name text-primary'} id={`task-${index}`}>{task.taskName}</strong>
-                  <input className="none text-input" required id={`update-${index}`} type="text" defaultValue={task.taskName} />
+                  <input className="none task-input" required id={`update-${index}`} type="text" defaultValue={task.taskName} />
                 </td>
                 <td className="">
                   <button className="edit-button" disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button">Edit</button>
@@ -91,7 +98,7 @@ export default function Task(prop) {
                   <button onClick={handleDelete} id={`delete-${index}`} type="button" className="delete-button">Delete</button>
                 </td>
               </tr>
-            )) : <p>No Task</p>
+            )) : ('')
         }
           </tbody>
         </table>

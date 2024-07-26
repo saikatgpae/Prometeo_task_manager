@@ -6,16 +6,6 @@
   text-decoration: line-through;
 }
 
-.task-table {
-  width: 100vw;
-}
-
-.task-input {
-  border: none;
-  background-color: transparent;
-  padding: 0.2em 0.5em;
-}
-
 .delete-button {
   color: red;
 }
@@ -37,6 +27,20 @@
   text-decoration: none;
 }
 
+
+/* dive tag holding the pag */
+.container-div {
+  color: black;
+}
+
+/* select tag filter */
+
+.filter-menu {
+  background-color: whitesmoke;
+  float: inline-start;
+}
+
+/* div tag holding the table */
 .table-div {
   border-radius: 5px;
   height: 400px;
@@ -44,26 +48,36 @@
   background-color: white;
 }
 
-.text-input {
+/* table tag */
+.task-table {
+  /* display: flex; */
+
+  /* width: 100%; */
+}
+
+/* tr tag row data */
+.table-data {
+  /* color: black; */
+}
+
+/* td tag */
+.task-display {
+  /* padding: 0 !important; */
+}
+
+/* input tag for update */
+.task-input {
   border: none;
   background-color: rgb(253, 246, 103);
 }
 
+/* strong tag to display task */
 .task-name {
-  width: 100px;
-}
+  /* width:335px; */
 
-.item2 {
-  grid-column: 2 / span 3;
-}
+  /* overflow:hidden; */
 
-.filter-menu {
-  background-color: whitesmoke;
-  float: inline-start;
-}
-
-.task-display {
-  /* padding: 0 !important; */
+  /* width: 100px; */
 }
 
 @media screen and (max-width: 767px) {

@@ -1,3 +1,5 @@
+'use client';
+
 import logo from './images/taskmanager.avif';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';

@@ -34,7 +34,7 @@ export default function AddTasks() {
         ref={taskInput}
         name="taskName"
         type="text"
-        placeholder="Type a Task"
+        placeholder="Add a Task"
         id="taskName"
         onChange={handleChange}
       />
