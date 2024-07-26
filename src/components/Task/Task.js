@@ -64,7 +64,7 @@ export default function Task(prop) {
 
   return (
     <div className="container">
-      <select onChange={titleSearch} className="filter-menu">
+      <select onChange={titleSearch} className="filter-menu" id="filter-menu">
         <option>all</option>
         <option>complete</option>
         <option>incomplete</option>
