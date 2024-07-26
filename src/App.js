@@ -1,4 +1,5 @@
 import logo from './images/taskmanager.avif';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 import Tasks from './components/Tasks/Tasks';
 
@@ -8,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <h1 className="text-primary">Tasks Manager</h1>
+      <h1 className="">Tasks Manager</h1>
       <Tasks />
     </div>
   );

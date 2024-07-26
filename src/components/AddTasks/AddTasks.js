@@ -30,18 +30,15 @@ export default function AddTasks() {
 
   return (
     <div className="m-3">
-      <label htmlFor="taskName">
-        Add you tasks
-        <br />
-        <input
-          ref={taskInput}
-          name="taskName"
-          type="text"
-          placeholder="Type a Task"
-          id="taskName"
-          onChange={handleChange}
-        />
-      </label>
+      <input
+        className="m-2 add-input p-2"
+        ref={taskInput}
+        name="taskName"
+        type="text"
+        placeholder="Type a Task"
+        id="taskName"
+        onChange={handleChange}
+      />
       <button onClick={handleClick} type="button" className="btn btn-primary" disabled={(!inputs || inputs[0] === ' ')}>Add</button>
     </div>
   );

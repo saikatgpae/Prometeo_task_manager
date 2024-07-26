@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
@@ -43,16 +43,18 @@ export default function Task(prop) {
   // Search function
   const titleSearch = (e) => {
     const input = e.target.value.toUpperCase();
-    // console.log('input', input);
     const table = document.getElementById('taskTable');
     const tr = table.querySelectorAll('.table-data');
     for (let i = 0; i < tr.length; i += 1) {
       const td = tr[i].getElementsByTagName('td')[0];
+      const inputCheckbox = td.getElementsByTagName('input')[0];
       if (td) {
-        const txtValue = td.textContent || td.innerText;
+        const checkedValue = inputCheckbox.checked;
         if (input === 'ALL') {
           tr[i].style.display = '';
-        } else if (txtValue.toUpperCase() === input) {
+        } else if (input === 'COMPLETE' && checkedValue === true) {
+          tr[i].style.display = '';
+        } else if (input === 'INCOMPLETE' && checkedValue === false) {
           tr[i].style.display = '';
         } else {
           tr[i].style.display = 'none';
@@ -62,46 +64,39 @@ export default function Task(prop) {
   };
 
   return (
-    <table id="taskTable" className="table table-striped">
+    <div className="container">
+      <select onChange={titleSearch} className="filter-menu">
+        <option>all</option>
+        <option>complete</option>
+        <option>incomplete</option>
+      </select>
+      <div className="table-responsive table-div">
+      <table id="taskTable" className="task-table table table-hover">
       <tbody>
-        <tr>
-          <th scope="col">
-            <select onChange={titleSearch} defaultValue="all">
-              <option>all</option>
-              <option>complete</option>
-              <option>incomplete</option>
-            </select>
-          </th>
-          <th scope="col">Status</th>
-          <th scope="col">Task Name</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
-        </tr>
         {
           (tasks)
             ? tasks.map((task, index) => (
               <tr key={uuid()} className="table-data">
-                <td className={(task.complete) ? 'text-success' : 'text-danger'}>
-                  {(task.complete) ? 'Complete' : 'Incomplete'}
+                <td className="">
+                  <input className="checkBox" onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
                 </td>
-                <td>
-                  <input onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
+                <td className="task-display">
+                  <strong className={(task.complete) ? 'task-name strike text-success' : 'task-name text-primary'} id={`task-${index}`}>{task.taskName}</strong>
+                  <input className="none text-input" required id={`update-${index}`} type="text" defaultValue={task.taskName} />
                 </td>
-                <td>
-                  <strong className={(task.complete) ? 'strike' : ''} id={`task-${index}`}>{task.taskName}</strong>
-                  <input id={`update-${index}`} className="none" type="text" defaultValue={task.taskName} />
+                <td className="">
+                  <button className="edit-button" disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button">Edit</button>
+                  <button className="none save-button" id={`save-${index}`} onClick={handleSaveClick} type="button">Save</button>
                 </td>
-                <td>
-                  <button disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button" className="btn btn-primary">Edit</button>
-                  <button id={`save-${index}`} onClick={handleSaveClick} type="button" className="none btn btn-primary">Save</button>
-                </td>
-                <td>
-                  <button onClick={handleDelete} id={`delete-${index}`} type="button" className="btn btn-danger">Delete</button>
+                <td className="">
+                  <button onClick={handleDelete} id={`delete-${index}`} type="button" className="delete-button">Delete</button>
                 </td>
               </tr>
             )) : <p>No Task</p>
         }
       </tbody>
     </table>
+    </div>
+    </div>
   );
 }

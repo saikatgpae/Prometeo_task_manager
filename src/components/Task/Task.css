@@ -5,3 +5,69 @@
 .strike {
   text-decoration: line-through;
 }
+
+.task-table {
+  width: 100vw;
+}
+
+.task-input {
+  border: none;
+  background-color: transparent;
+  padding: 0.2em 0.5em;
+}
+
+.delete-button {
+  color: red;
+}
+
+.save-button,
+.edit-button,
+.delete-button {
+  border: none;
+  float: inline-end;
+}
+
+.save-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+  text-decoration: underline;
+}
+
+.edit-button:disabled {
+  text-decoration: none;
+}
+
+.table-div {
+  border-radius: 5px;
+  height: 400px;
+  width: 100%;
+  background-color: white;
+}
+
+.text-input {
+  border: none;
+  background-color: rgb(253, 246, 103);
+}
+
+.task-name {
+  width: 100px;
+}
+
+.item2 {
+  grid-column: 2 / span 3;
+}
+
+.filter-menu {
+  background-color: whitesmoke;
+  float: inline-start;
+}
+
+.task-display {
+  /* padding: 0 !important; */
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 !important;
+  }
+}
