@@ -27,7 +27,7 @@
   text-decoration: none;
 }
 
-/* dive tag holding the pag */
+/* div tag holding the pag */
 .container-div {
   color: black;
 }
@@ -77,6 +77,8 @@
   /* overflow:hidden; */
 
   /* width: 100px; */
+  max-width: 100vw;
+  word-wrap: break-word;
 }
 
 @media screen and (max-width: 767px) {
