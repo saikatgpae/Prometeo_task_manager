@@ -1,0 +1,88 @@
+.none {
+  display: none !important;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.delete-button {
+  color: red;
+}
+
+.save-button,
+.edit-button,
+.delete-button {
+  border: none;
+  float: inline-end;
+}
+
+.save-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+  text-decoration: underline;
+}
+
+.edit-button:disabled {
+  text-decoration: none;
+}
+
+/* div tag holding the pag */
+.container-div {
+  color: black;
+}
+
+/* select tag filter */
+
+.filter-menu {
+  background-color: whitesmoke;
+  float: inline-start;
+}
+
+/* div tag holding the table */
+.table-div {
+  border-radius: 5px;
+  height: 400px;
+  width: 100%;
+  background-color: white;
+}
+
+/* table tag */
+.task-table {
+  /* display: flex; */
+
+  /* width: 100%; */
+}
+
+/* tr tag row data */
+.table-data {
+  /* color: black; */
+}
+
+/* td tag */
+.task-display {
+  /* padding: 0 !important; */
+}
+
+/* input tag for update */
+.task-input {
+  border: none;
+  background-color: rgb(253, 246, 103);
+}
+
+/* strong tag to display task */
+.task-name {
+  /* width:335px; */
+
+  /* overflow:hidden; */
+
+  /* width: 100px; */
+  max-width: 100vw;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 !important;
+  }
+}

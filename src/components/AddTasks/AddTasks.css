@@ -1,0 +1,18 @@
+* {
+  background-color: transparent;
+}
+
+.add-input {
+  border: none;
+  background-color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+}
+
+body {
+  background: rgb(11, 46, 200) linear-gradient(45deg, aqua, rgb(7, 178, 184), rgb(229, 8, 96)) fixed;
+  color: white;
+  font: normal 32px/1.6 system-ui, sans-serif;
+  text-shadow: 0 1px 1px hsl(0 0% 0% / 20%);
+  margin: 3rem;
+}

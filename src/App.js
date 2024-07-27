@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+'use client';
+
+import logo from './images/taskmanager.avif';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
+import Tasks from './components/Tasks/Tasks';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App m-2">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <h1 className="">Tasks Manager</h1>
+      <Tasks />
     </div>
   );
 }
