@@ -1,8 +1,10 @@
+// /* eslin-disable */
 const FETCH_TASKS = 'FETCH_TASKS';
 const COMPLETE_TASK = 'COMPLETE_TASK';
 const INCOMPLETE_TASK = 'INCOMPLETE_TASK';
 const EDIT_TASK = 'EDIT_TASK';
 const DELETE_TASK = 'DELETE_TASK';
+const ADD_TASK = 'ADD_TASK';
 
 // Fetch tasks from local storage if any
 const fetchTasks = () => (dispatch) => {
@@ -11,6 +13,11 @@ const fetchTasks = () => (dispatch) => {
     type: FETCH_TASKS,
     tasks,
   });
+};
+
+// Add Task
+const addTask = (task) => (dispatch) => {
+  dispatch({ type: ADD_TASK, task });
 };
 
 // Edit Task
@@ -37,6 +44,16 @@ const initialState = JSON.parse(localStorage.getItem('tasks'));
 // eslint-disable-next-line default-param-last
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_TASK: {
+      const task = [action.task];
+      if (!state) {
+        localStorage.setItem('tasks', JSON.stringify(task));
+        return task;
+      }
+      const newTask = [...state, action.task];
+      localStorage.setItem('tasks', JSON.stringify(newTask));
+      return newTask;
+    }
     case FETCH_TASKS:
       return action.tasks;
     case COMPLETE_TASK: {
@@ -59,7 +76,6 @@ const tasksReducer = (state = initialState, action) => {
       localStorage.setItem('tasks', JSON.stringify(newState));
       return newState;
     }
-
     case EDIT_TASK: {
       const newState = state.map((task, index) => {
         if (index === Number(action.id)) {
@@ -70,13 +86,15 @@ const tasksReducer = (state = initialState, action) => {
       localStorage.setItem('tasks', JSON.stringify(newState));
       return newState;
     }
-
     case DELETE_TASK: {
       const newState = state.filter((element, index) => index !== action.id);
+      if (newState.length < 1) {
+        localStorage.removeItem('tasks');
+        return null;
+      }
       localStorage.setItem('tasks', JSON.stringify(newState));
       return newState;
     }
-
     default:
       return state;
   }
@@ -84,5 +102,5 @@ const tasksReducer = (state = initialState, action) => {
 
 export default tasksReducer;
 export {
-  fetchTasks, completeTask, incompleteTask, editTask, deleteTask,
+  fetchTasks, completeTask, incompleteTask, editTask, deleteTask, addTask,
 };

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchTasks } from '../../Redux/Tasks/tasksRedux';
+import { addTask } from '../../Redux/Tasks/tasksRedux';
 import './AddTasks.css';
 
 export default function AddTasks() {
@@ -15,16 +15,10 @@ export default function AddTasks() {
 
   // Handle the Add button click
   const handleClick = () => {
-    const prevValue = JSON.parse(localStorage.getItem('tasks'));
-    if (prevValue === null) {
-      const newValue = [{ complete: false, taskName: inputs }];
-      localStorage.setItem('tasks', JSON.stringify(newValue));
-    } else {
-      const newValue = [...prevValue, { complete: false, taskName: inputs }];
-      localStorage.setItem('tasks', JSON.stringify(newValue));
-    }
+    const task = { complete: false, taskName: inputs };
+    dispatch(addTask(task));
     taskInput.current.value = '';
-    dispatch(fetchTasks());
+    setInputs('');
   };
 
   return (
