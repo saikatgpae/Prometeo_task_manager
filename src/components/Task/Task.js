@@ -1,13 +1,12 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
-import uuid from 'react-uuid';
 import './Task.css';
 import { useDispatch } from 'react-redux';
 import {
   completeTask, deleteTask, editTask, incompleteTask,
 } from '../../Redux/Tasks/tasksRedux';
 import Filter from '../Filter/Filter';
-import TaskTable from '../TaskTable/TaskTable'
+import TaskTable from '../TaskTable/TaskTable';
 
 export default function Task(prop) {
   const dispatch = useDispatch();
@@ -77,7 +76,13 @@ export default function Task(prop) {
         {
           (tasks)
             ? (
-              <TaskTable tasks={tasks} handleChang={handleChang} handleEditClick={handleEditClick} handleSaveClick={handleSaveClick} handleDelete={handleDelete} />
+              <TaskTable
+                tasks={tasks}
+                handleChang={handleChang}
+                handleEditClick={handleEditClick}
+                handleSaveClick={handleSaveClick}
+                handleDelete={handleDelete}
+              />
             ) : ('')
         }
       </div>
