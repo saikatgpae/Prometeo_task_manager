@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import React from 'react';
 import uuid from 'react-uuid';
 import './Task.css';
@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import {
   completeTask, deleteTask, editTask, incompleteTask,
 } from '../../Redux/Tasks/tasksRedux';
+import Filter from '../Filter/Filter';
+import TaskTable from '../TaskTable/TaskTable'
 
 export default function Task(prop) {
   const dispatch = useDispatch();
@@ -68,41 +70,14 @@ export default function Task(prop) {
       {
         (tasks)
           ? (
-            <select onChange={titleSearch} className="filter-menu" id="filter-menu">
-              <option>all</option>
-              <option>complete</option>
-              <option>incomplete</option>
-            </select>
+            <Filter titleSearch={titleSearch} />
           ) : ('')
       }
       <div className="table-responsive table-div">
         {
           (tasks)
             ? (
-              <table id="taskTable" className="task-table table table-hover">
-                <tbody>
-                  {
-                    tasks.map((task, index) => (
-                      <tr key={uuid()} className="table-data">
-                        <td className="">
-                          <input className="checkBox" onChange={handleChang} style={{ accentColor: 'green' }} type="checkbox" defaultChecked={task.complete} id={`status-${index}`} />
-                        </td>
-                        <td className="task-display">
-                          <strong className={(task.complete) ? 'task-name strike text-success' : 'task-name text-primary'} id={`task-${index}`}>{task.taskName}</strong>
-                          <input className="none task-input" required id={`update-${index}`} type="text" defaultValue={task.taskName} />
-                        </td>
-                        <td className="">
-                          <button className="edit-button" disabled={task.complete} id={`edit-${index}`} onClick={handleEditClick} type="button">Edit</button>
-                          <button className="none save-button" id={`save-${index}`} onClick={handleSaveClick} type="button">Save</button>
-                        </td>
-                        <td className="">
-                          <button onClick={handleDelete} id={`delete-${index}`} type="button" className="delete-button">Delete</button>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
+              <TaskTable tasks={tasks} handleChang={handleChang} handleEditClick={handleEditClick} handleSaveClick={handleSaveClick} handleDelete={handleDelete} />
             ) : ('')
         }
       </div>
