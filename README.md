@@ -11,7 +11,7 @@
 - Technologies used webpack, linters, jest.
 
 
-## Live Demo (if available)
+## Live Demo
 
 [Live Demo Link](https://prometeotaskmanager.netlify.app/)
 
