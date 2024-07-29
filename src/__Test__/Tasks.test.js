@@ -12,8 +12,6 @@ const initialState = [
 const mockStore = configureStore([]);
 let store = mockStore(initialState);
 
-
-
 test('Tasks render correctly', ()=> {
     const component = renderer.create(<Provider store={store}><Tasks /></Provider>);
     const tree = component.toJSON()
