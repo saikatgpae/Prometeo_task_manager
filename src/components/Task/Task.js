@@ -68,7 +68,7 @@ export default function Task(prop) {
       {
         (tasks)
           ? (
-            <select onChange={titleSearch} className="filter-menu" id="filter-menu">
+            <select data-testid="select-menu-input" onChange={titleSearch} className="filter-menu" id="filter-menu">
               <option>all</option>
               <option>complete</option>
               <option>incomplete</option>

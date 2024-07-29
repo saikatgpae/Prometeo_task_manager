@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tasks render correctly 1`] = `
+Array [
+  <div
+    className="m-3"
+  >
+    <input
+      className="m-2 add-input p-2"
+      data-testid="add-task-input"
+      id="taskName"
+      name="taskName"
+      onChange={[Function]}
+      placeholder="Add a Task"
+      type="text"
+    />
+    <button
+      className="btn btn-primary"
+      data-testid="add-task-button"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Add
+    </button>
+  </div>,
+  <div
+    className="container container-div"
+  >
+    <div
+      className="table-responsive table-div"
+    />
+  </div>,
+]
+`;

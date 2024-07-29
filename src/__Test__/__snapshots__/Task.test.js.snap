@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tasks render correctly 1`] = `
+<div
+  className="container container-div"
+>
+  <select
+    className="filter-menu"
+    data-testid="select-menu-input"
+    id="filter-menu"
+    onChange={[Function]}
+  >
+    <option>
+      all
+    </option>
+    <option>
+      complete
+    </option>
+    <option>
+      incomplete
+    </option>
+  </select>
+  <div
+    className="table-responsive table-div"
+  >
+    <table
+      className="task-table table table-hover"
+      id="taskTable"
+    >
+      <tbody>
+        <tr
+          className="table-data"
+        >
+          <td
+            className=""
+          >
+            <input
+              className="checkBox"
+              defaultChecked={false}
+              id="status-0"
+              onChange={[Function]}
+              style={
+                Object {
+                  "accentColor": "green",
+                }
+              }
+              type="checkbox"
+            />
+          </td>
+          <td
+            className="task-display"
+          >
+            <strong
+              className="task-name text-primary"
+              id="task-0"
+            >
+              playing
+            </strong>
+            <input
+              className="none task-input"
+              defaultValue="playing"
+              id="update-0"
+              required={true}
+              type="text"
+            />
+          </td>
+          <td
+            className=""
+          >
+            <button
+              className="edit-button"
+              disabled={false}
+              id="edit-0"
+              onClick={[Function]}
+              type="button"
+            >
+              Edit
+            </button>
+            <button
+              className="none save-button"
+              id="save-0"
+              onClick={[Function]}
+              type="button"
+            >
+              Save
+            </button>
+          </td>
+          <td
+            className=""
+          >
+            <button
+              className="delete-button"
+              id="delete-0"
+              onClick={[Function]}
+              type="button"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

@@ -31,8 +31,9 @@ export default function AddTasks() {
         placeholder="Add a Task"
         id="taskName"
         onChange={handleChange}
+        data-testid="add-task-input"
       />
-      <button onClick={handleClick} type="button" className="btn btn-primary" disabled={(!inputs || inputs[0] === ' ')}>Add</button>
+      <button onClick={handleClick} type="button" className="btn btn-primary" data-testid="add-task-button" disabled={(!inputs || inputs[0] === ' ')}>Add</button>
     </div>
   );
 }
