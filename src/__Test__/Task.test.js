@@ -7,8 +7,8 @@ const tasks = [
   { complete: false, taskName: 'playing' },
 ];
 
-  test('Tasks render correctly', ()=> {
-    const component = renderer.create(<Provider store={store}><Task tasks={tasks} /></Provider>);
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
-  });
+test('Tasks render correctly', () => {
+  const component = renderer.create(<Provider store={store}><Task tasks={tasks} /></Provider>);
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});

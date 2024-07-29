@@ -4,10 +4,10 @@ import renderer from 'react-test-renderer';
 import AddTasks from '../components/AddTasks/AddTasks';
 import store from '../Redux/configureStore';
 
-test('Tasks render correctly', ()=> {
+test('Tasks render correctly', () => {
   const component = renderer.create(<Provider store={store}><AddTasks /></Provider>);
-  const tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
 it('should render the component onto the screen', () => {
