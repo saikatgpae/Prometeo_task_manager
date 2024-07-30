@@ -41,7 +41,7 @@ export default function Task(prop) {
     (checkedValue) ? dispatch(completeTask(arrIndex)) : dispatch(incompleteTask(arrIndex));
   };
 
-  // Search function
+  // Filter function
   const titleSearch = (e) => {
     const input = e.target.value.toUpperCase();
     const table = document.getElementById('taskTable');
